@@ -23,7 +23,7 @@ These project/application show the list of stocks and based on tag to filter it.
 
 2. **Installation**
     -  Clone the Repository
-        - git clone https://github.com/your-username/stock-list.git
+        - git clone https://github.com/kumbharamol22/stock-list.git
         - cd stock-list/stock
         - `npm install`
         - Run: `ng serve`

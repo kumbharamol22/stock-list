@@ -1,0 +1,124 @@
+<div class="clr-row clr-justify-content-center">
+  <div class="clr-col-8">
+    <div
+      class="filter-container clr-row clr-justify-content-end clr-align-center"
+    >
+      <div class="clr-form clr-form-horizontal clr-row">
+        <div class="clr-form-control clr-col-12 clr-text-right">
+          <button
+            class="btn btn-sm"
+            (click)="addDummyStock()"
+            aria-label="Add dummy stocks"
+          >
+            Add Dummy Stocks
+          </button>
+        </div>
+      </div>
+    </div>
+    <div
+      class="filter-container clr-row clr-justify-content-end clr-align-center"
+    >
+      <div class="clr-form clr-form-horizontal clr-row">
+        <div class="clr-form-control clr-col-6 clr-text-right">
+          <label for="tagFilter" class="clr-control-label">Tag Filter:</label>
+        </div>
+        <div class="clr-form-control clr-col-3">
+          <div class="clr-control-container">
+            <div class="clr-input-wrapper">
+              <select
+                id="tagFilter"
+                class="clr-select"
+                [(ngModel)]="selectedTag"
+                (change)="onTagChange()"
+                aria-label="Select a tag filter"
+              >
+                <option *ngFor="let tag of tags">{{ tag }}</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <clr-datagrid aria-label="Stock list">
+      <clr-dg-column>Symbol</clr-dg-column>
+      <clr-dg-column>Name</clr-dg-column>
+      <clr-dg-column>Last Price</clr-dg-column>
+      <clr-dg-column>Market Cap</clr-dg-column>
+      <clr-dg-column>Tag</clr-dg-column>
+      <clr-dg-column>Actions</clr-dg-column>
+
+      <clr-dg-row
+        *ngFor="let stock of filteredStocks"
+        [attr.aria-rowindex]="'i' + 1"
+        role="row"
+      >
+        <clr-dg-cell
+          (click)="viewDetails(stock)"
+          class="highlight-cell"
+          role="cell"
+          tabindex="0"
+        >
+          {{ stock.symbol }}
+        </clr-dg-cell>
+        <clr-dg-cell role="cell">{{ stock.name }}</clr-dg-cell>
+        <clr-dg-cell role="cell">{{ stock.last_price }}</clr-dg-cell>
+        <clr-dg-cell role="cell">{{ stock.market_cap }}</clr-dg-cell>
+        <clr-dg-cell role="cell">{{ stock.tag }}</clr-dg-cell>
+        <clr-dg-cell role="cell">
+          <clr-icon
+            shape="trash"
+            class="is-solid"
+            (click)="openDeleteConfirmation(stock.symbol)"
+            [attr.aria-label]="'Delete stock ' + stock.symbol"
+          ></clr-icon>
+        </clr-dg-cell>
+      </clr-dg-row>
+    </clr-datagrid>
+  </div>
+</div>
+
+<div class="clr-row clr-justify-content-center">
+  <div class="clr-col-8">
+    <div
+      *ngIf="selectedStock"
+      class="clr-row clr-align-center clr-mt-md"
+      role="region"
+      aria-labelledby="stockDetailsHeading"
+    >
+      <div class="clr-col">
+        <h3 id="stockDetailsHeading">Stock Details</h3>
+
+        <div class="clr-row clr-align-top">
+          <div class="clr-col-3">
+            <p><strong>Symbol:</strong> {{ selectedStock.symbol }}</p>
+          </div>
+          <div class="clr-col-3">
+            <p><strong>Name:</strong> {{ selectedStock.name }}</p>
+          </div>
+        </div>
+
+        <div class="clr-row clr-align-top">
+          <div class="clr-col-3">
+            <p><strong>Last Price:</strong> {{ selectedStock.last_price }}</p>
+          </div>
+          <div class="clr-col-3">
+            <p><strong>Market Cap:</strong> {{ selectedStock.market_cap }}</p>
+          </div>
+        </div>
+
+        <div class="clr-row clr-align-top">
+          <div class="clr-col-3">
+            <p><strong>Tag:</strong> {{ selectedStock.tag }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<app-confirmation-modal
+  #confirmationModal
+  (deleteConfirmed)="deleteStock(stockToDelete)"
+  aria-labelledby="confirmationModalLabel"
+></app-confirmation-modal>

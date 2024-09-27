@@ -64,6 +64,14 @@ app.get("/api/addDefaultStocksList", (req, res) => {
   res.json(defaultStock);
 });
 
+/** Get Unique */
+app.get('/api/UniqueTags', (req, res) => {
+  const stocks = readStocksData();
+  const uniqueTags = new Set(stocks.map(stock => stock.tag.charAt(0).toUpperCase() + stock.tag.slice(1)));
+  const tagsArray = ['All', ...Array.from(uniqueTags)];
+  res.json(tagsArray);
+});
+
 // Start the server
 const port = 3000;
 app.listen(port, () => {

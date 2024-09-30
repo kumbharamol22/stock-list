@@ -1,6 +1,6 @@
 # Stock List Project
 
-#Frontend - Angular 
+# Frontend - Angular 
 
 This Stock list project built using **Angular 13** and use the **Clarity Design** library for use of create UI component/design.
 These project/application show the list of stocks and based on tag to filter it.
@@ -50,7 +50,7 @@ Run `ng generate component component-name` to generate a new component. You can 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
 
-#Backend - Node JS
+# Backend - Node JS
 
 # Stock List Project API
 
@@ -60,7 +60,7 @@ These project/application show the list of stocks and based on tag to filter it.
 
 ### Key Sections
 1. **Getting Started**: Set up NodeJS.
-2. **Installation**: Detailed instructions on installing dependencies and running both the backend and frontend.
+2. **Installation**: Detailed instructions on installing dependencies and running on backend
 
 
 1. **Getting Started**
